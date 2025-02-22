@@ -10,7 +10,7 @@ This is a simple Todo application built using **Angular** for the front-end and 
 4. [Setup Angular Client](#setup-angular-client)
 5. [MongoDB Setup](#mongodb-setup)
 6. [Start the Application](#start-the-application)
-
+6. [Application explanation](#application-explanation)
 ---
 ### Architecture Explanation
 
@@ -113,3 +113,14 @@ Each **todo document** will have the following structure:
   description: String, // Optional description of the todo
   Status: enum,  // Boolean indicating if the todo is completed or not
 }
+
+---
+
+### Application explanation
+
+1. When the application start the default route is todolist
+2. You can see all the list of the todo, chnage todo status or delete, and navigate to edit route to edit the todo.
+3. Once you click save on the edit you will navigate back to todolist
+4. When click add you will navigate to add route.
+5. After you click save on add route you will navigate to edit route with the id you got from the server.
+6. After you click save again you will return to todolist route
