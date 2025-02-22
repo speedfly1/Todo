@@ -45,7 +45,6 @@ export class TodoListComponent implements OnInit {
         });
         break;
       default: {
-        console.log(actionId);
         break;
       }
     }
