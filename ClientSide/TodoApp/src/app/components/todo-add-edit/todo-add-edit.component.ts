@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class TodoAddEditComponent implements OnInit{
   private todoo!: todo;
   private routeSub!: Subscription;
+  private todoId: string = "";
   form: FormGroup = this.fb.group({
     id: [{value:'', disabled: true}, Validators.required, ],
     name: ['', Validators.required],
@@ -25,12 +26,10 @@ export class TodoAddEditComponent implements OnInit{
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
-      console.log(params) //log the entire params object
-      console.log(params['id']) //log the value of id
       if(!!params['id']){
         this.todoService.getTodo(params['id']).subscribe((todo: todo) => {
+          this.todoId = todo._id;
           this.todoo = todo;
-          console.log(this.todoo)
           this.form.setValue({
             id: this.todoo._id,
             name: this.todoo.name,
@@ -44,20 +43,21 @@ export class TodoAddEditComponent implements OnInit{
 
   save(){
     this.todoo = {
-      id: this.form.value.id,
-      _id: this.form.value.id,
+      id: this.todoId,
+      _id: this.todoId,
       name:this.form.value.name,
       description:this.form.value.description,
       status:this.form.value.status
     }
-    if(!!this.form.value.id){
+    if(!this.todoId){
       this.todoService.saveTodo(this.todoo).subscribe((todoId) =>{
-        console.log(todoId);
         this.router.navigate(['/edit', todoId.id])
       });
     }
     else{
-      
+      this.todoService.updateTodo(this.todoo).subscribe((todoId) =>{
+        this.router.navigate(['/todolist']);
+      });
     }
 
   }

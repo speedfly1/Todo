@@ -1,13 +1,22 @@
 <div id="cointainer" [formGroup] ="form">
-
-
-    ID: <input type="text" formControlName="id">
-    <br>
-    Nmae: <input type="text" formControlName="name">
-    <br>
-    Description: <input type="text" formControlName="description">
-    <br>
-    Stauts: <input type="text" formControlName="status">
-    <br>
-    <button (click)="save()">Save</button>
+<table>
+    <tr>
+        <td>ID:</td> <td><input type="text" formControlName="id"></td>
+    </tr>
+    <tr>
+        <td>Nmae: </td> <td><input type="text" formControlName="name"></td>
+    </tr>
+    <tr>
+        <td> Description:</td> <td><input type="text" formControlName="description"></td>
+    </tr>
+    <tr>
+        <td>Stauts: </td> 
+        <td><select formControlName="status" required>
+            <option value=0>incomplete</option>
+            <option value=1>completed</option>
+        </select>
+        </td>
+    </tr>
+</table>
+<button (click)="save()">Save</button>
 </div>
