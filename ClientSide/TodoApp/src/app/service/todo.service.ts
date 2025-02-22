@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, retry } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { todo } from '../model/todo';
 
@@ -7,7 +7,7 @@ import { todo } from '../model/todo';
   providedIn: 'root'
 })
 export class TodoService {
-
+  
   constructor(private http: HttpClient) { }
 
   getTodos(): Observable<todo[]> {
@@ -19,12 +19,19 @@ export class TodoService {
   }
 
   saveTodo(todo: todo){
-    console.log(todo);
     return this.http.post<any>("http://localhost:3000/todo",todo);
   }
 
   updateTodo(todo: todo){
-    console.log(todo);
-    return this.http.patch<boolean>("http://localhost:3000/todo",todo);
+    return this.http.put<boolean>("http://localhost:3000/todo",todo);
+  }
+
+  updateTodoStatus(id: string, status: number){
+    return this.http.patch<boolean>("http://localhost:3000/todo",{id:id, status:status});
+  }
+
+  deleteTodo(todoId: string){
+    console.log(todoId);
+    return this.http.delete(`http://localhost:3000/todo/${todoId}`);
   }
 }

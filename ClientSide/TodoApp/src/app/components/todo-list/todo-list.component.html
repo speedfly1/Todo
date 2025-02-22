@@ -1,16 +1,32 @@
-blabla
-
+    <button (click)="addTodo()">Add</button>
     <table>
         <tr>
+        <th></th>
         <th>id</th>
         <th>name</th>
         <th>description</th>
         <th>status</th>
     </tr>
     <tr *ngFor="let todo of todoList">
+        <td><div>
+            <label>Actions: </label>
+            <select #device (change)="ActionRequire($event.target, todo._id, todo.status)">
+              <option value="0"></option>
+              <option value="1">Edit</option>
+              <option value="2">Delete</option>
+              <ng-container [ngSwitch]="todo.status">
+                <option value="3" *ngSwitchCase = 0>completed</option>
+                <option value="3" *ngSwitchCase = 1>incomplete</option>
+            </ng-container>
+            </select>
+            </div>
+        </td>
         <td>{{ todo._id }}</td>
         <td>{{ todo.name }}</td>
         <td>{{ todo.description }}</td>
-        <td>{{ todo.status }}</td>
+        <ng-container [ngSwitch]="todo.status">
+            <td *ngSwitchCase = 0>incomplete</td>
+            <td *ngSwitchCase = 1>completed</td>
+        </ng-container>
     </tr>
     </table>
