@@ -1,0 +1,16 @@
+blabla
+
+    <table>
+        <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>description</th>
+        <th>status</th>
+    </tr>
+    <tr *ngFor="let todo of todoList">
+        <td>{{ todo._id }}</td>
+        <td>{{ todo.name }}</td>
+        <td>{{ todo.description }}</td>
+        <td>{{ todo.status }}</td>
+    </tr>
+    </table>
