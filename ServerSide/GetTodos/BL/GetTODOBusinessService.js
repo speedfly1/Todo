@@ -1,12 +1,19 @@
 import AllTodoLoader from '../Loaders/AllTodoLoader.js';
+import cache from '../../Cache/CacheService.js'
 
 class GetTODOBusinessService{
 
     constructor(){}
 
-    async Execute(req){
-        const loader = new AllTodoLoader();
-        return await loader.Load();
+    async Execute(){
+        const cachedData = cache.getCache("Todos");
+        if(cachedData){
+            return cachedData;
+        }
+        const todos = await new AllTodoLoader().Load();
+
+        cache.setCache("Todos", todos);
+        return todos;
     }
 }
 
