@@ -4,8 +4,8 @@ class TodoUpdater{
 
     constructor(){}
 
-    async Save(todo){
-        return await new TodoCommand().Save(todo);
+    async Update(todo){
+        return await new TodoCommand().Update(todo);
     }
 }
 

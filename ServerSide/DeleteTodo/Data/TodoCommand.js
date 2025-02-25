@@ -4,9 +4,8 @@ class TodoCommand{
 
     constructor(){}
 
-    async Update(todo){
-        await MongoSingleton.getClient().findByIdAndUpdate(todo.id,todo);
-        return true;
+    async Delete(todoId){
+        return await MongoSingleton.getClient().findByIdAndDelete(todoId);;
     }
 }
 
